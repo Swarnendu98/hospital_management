@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+        <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <h1>AllSafe Bank</h1></div>
+    <hr>
+    <hr>
+    <div align="center" class="headerdiv" style="height:550px">
+        <br>
+    <br>
+    <br>
+    <br>
+        <form class="pure-form pure-form-aligned" method="post" action="/">
+    <fieldset>
+        <div class="pure-control-group">
+            <label style="color: #01579B;font-size: large">ExecutiveID</label>
+            <input type="text" name="ex_id" placeholder="ExecutiveID" required />
+        </div>
+        <div class="pure-control-group">
+            <label  style="color: #01579B;font-size: large">Password</label>
+            <input type="password"  name="ex_pass" placeholder="Password" required/>
+        </div>
+        <div class="pure-controls">
+            <button type="submit" class="pure-button pure-button-primary" value="Submit">Log In</button>
+        </div>
+    </fieldset>
+</form>
+<div>
+    {%if message %}
+    <p>{{message}}</p>
+    {% endif %}
+
+</div>
+
+    </div>
+
+</body>
+</html>

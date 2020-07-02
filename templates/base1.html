@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/navbar1.css')}}">
+     {% block head %} {% endblock %}
+
+</head>
+<body bgcolor="#e1f5fe">
+<div>
+<ul id="menu-bar" style="align-items: self-end">
+ <li><a href="{{url_for('home')}}">Home</a></li>
+ <li><a href="#">Customer</a>
+  <ul>
+   <li><a href="#">Create &nbsp;Customer</a></li>
+   <li><a href="#">Update &nbsp;Customer</a></li>
+   <li><a href="#">Delete &nbsp;Customer</a></li>
+   <li><a href="#">Customer &nbsp;Status</a></li>
+  </ul>
+ </li>
+ <li><a href="#">Accounts</a>
+  <ul>
+   <li><a href="#">Create  Account</a></li>
+   <li><a href="#">Deposit</a></li>
+   <li><a href="#">Withdraw</a></li>
+   <li><a href="#">Transfer</a></li>
+  </ul>
+ </li>
+    <li><a href="#">Search Online</a>
+  <ul>
+   <li><a href="#">search Customer</a></li>
+   <li><a href="#">Search Account</a></li>
+   <li><a href="#">Transactions</a></li>
+   <li><a href="#">Customer Log</a></li>
+  </ul>
+ </li>
+    <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
+ <li style="alignment: right"><a href="{{url_for('logout')}}">Logout</a></li>
+</ul>
+    </div>
+<br>
+<br>
+<div style="margin-left: 20px;margin-right: 20px;background-color: #e1f5fe;min-height: auto;padding: 5px 10px;border-radius: 3px">
+{% block body %} {% endblock %}
+    </div>
+
+</body>
+</html>

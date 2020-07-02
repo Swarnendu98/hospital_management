@@ -1,12 +1,24 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,g,session,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
 
 
 app = Flask(__name__)
+app.secret_key = 'somesecretkeythatonlyishouldknow'
+
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///database.db'
 db = SQLAlchemy(app)
+
+
+class User:
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password
+
+    def __repr__(self):
+        return f'<User: {self.username}>'
 
 class executive_data(db.Model):
     ex_id = db.Column(db.Integer,primary_key=True,autoincrement=True)
@@ -39,9 +51,32 @@ class diagnosis_data(db.Model):
 
 @app.route("/",methods=['GET','POST'])
 def login():
-    if request.method =='POST' and 'exe_id'and 'exe_pass' in request.form:
+    if request.method =='POST' and 'ex_id' and 'ex_pass' in request.form:
+        session.pop('user_id',None)
+        ex_id= request.form.get('ex_id')
+        ex_pass=request.form.get('ex_pass')
+        password = executive_data.query.get(ex_id).ex_pass
+        if password == ex_pass :
+            session['user_id']= ex_id
+            return redirect(url_for('home'))
+        else:
+            message = 'INCORRECT USER NAME OR PASSWORD'
+            return render_template('login.html',message=message)
+    else:
+        return render_template('login.html')
+@app.route("/home")
+def home():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        ex_id = session['user_id']
+        ex_data = executive_data.query.get_or_404(ex_id)
+        ex_name = ex_data.ex_name
 
-        return "Hello"
-    else :
-        return render_template("login.html")
+        return render_template('home.html',name = ex_name)
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('user_id', None)
+   return redirect(url_for('login'))
 
