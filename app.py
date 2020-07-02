@@ -220,6 +220,25 @@ def show_meds_record():
             return render_template('show_meds_record.html')
 
 
+@app.route('/add_diagnosis',methods=['GET','POST'])
+def add_diagnosis():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method =='POST':
+            patient_id=request.form['patient_id']
+            test_name= request.form['test_name']
+            cost = request.form['cost']
+
+            new_diagnosis = diagnosis_data(patient_id=patient_id,test_name=test_name,cost=cost)
+            db.session.add(new_diagnosis)
+            db.session.commit()
+            message = 'diagnosis added'
+            return render_template('add_diagnosis.html',message=message)
+        else:
+            return render_template('add_diagnosis.html')
+
+
 
 
 
