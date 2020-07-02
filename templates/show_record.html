@@ -1,0 +1,47 @@
+{% extends 'base1.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+<title>Records</title>
+{% endblock %}
+
+{% block body %}
+<h1>Records</h1>
+
+
+<div style="background-color: rgba(174, 213, 129, 0.5);margin-right: 150px;margin-left: 150px;border-radius: 3px;padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 10px;padding-bottom: 10px">
+
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>DOJ</th>
+            <th>Type of Room</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for something in data %}
+        <tr>
+            <td>{{something.patient_id}}</td>
+            <td>{{something.patient_name}}</td>
+            <td>{{something.patient_age}}</td>
+            <td>{{something.patient_address}}</td>
+            <td>{{something.patient_admission_date}}</td>
+            <td>{{something.patient_bed_type}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

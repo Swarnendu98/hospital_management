@@ -10,31 +10,34 @@
 <div>
 <ul id="menu-bar" style="align-items: self-end">
  <li><a href="{{url_for('home')}}">Home</a></li>
- <li><a href="#">Customer</a>
+ <li><a href="#">Patient</a>
   <ul>
    <li><a href="{{url_for('create_patient')}}">Create &nbsp;Patient</a></li>
    <li><a href="{{url_for('update_patient')}}">Update &nbsp;Patient</a></li>
-   <li><a href="#">Delete &nbsp;Customer</a></li>
-   <li><a href="#">Customer &nbsp;Status</a></li>
+   <li><a href="{{url_for('delete_patient')}}">Delete &nbsp;Patient</a></li>
+   <li><a href="{{url_for('show_record')}}">Show Records</a></li>
   </ul>
  </li>
- <li><a href="#">Accounts</a>
+ <li><a href="#">Medicine</a>
   <ul>
-   <li><a href="#">Create  Account</a></li>
-   <li><a href="#">Deposit</a></li>
-   <li><a href="#">Withdraw</a></li>
-   <li><a href="#">Transfer</a></li>
+   <li><a href="{{url_for('add_meds')}}">Add Medicine</a></li>
+   <li><a href="#">Medicine Record</a></li>
   </ul>
  </li>
-    <li><a href="#">Search Online</a>
+    <li><a href="#">Diagnosis</a>
   <ul>
-   <li><a href="#">search Customer</a></li>
-   <li><a href="#">Search Account</a></li>
-   <li><a href="#">Transactions</a></li>
-   <li><a href="#">Customer Log</a></li>
+   <li><a href="#">Add diagnosis</a></li>
+   <li><a href="#">Diagnosis Record</a></li>
   </ul>
  </li>
-    <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
+    <li><a href="#">Billing</a>
+  <ul>
+   <li><a href="#">Medicine Bill</a></li>
+   <li><a href="#">Diagnosis Bill</a></li>
+   <li><a href="#">Total Bll</a></li>
+  </ul>
+ </li>
+    <li>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</li>
  <li style="alignment: right"><a href="{{url_for('logout')}}">Logout</a></li>
 </ul>
     </div>

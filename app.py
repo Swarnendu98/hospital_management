@@ -153,6 +153,60 @@ def update_patient():
         else:
             return render_template("update_patient.html")
 
+@app.route('/delete_patient',methods=['GET','POST'])
+def delete_patient():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            data= patient_data.query.filter_by(patient_adhar=search).first()
+            if data is None:
+                return render_template("delete_patient.html",message="Patient does not exist")
+            else:
+                return render_template("delete_patient.html",data = data )
+
+
+        elif request.method == 'POST' and 'patient_adhar' in request.form:
+            patient_id =        request.form['patient_id']
+            #HARD DELETE OPTION DUE TO NO patient_status FIELD IN DATABASE
+            patient_data.query.filter_by(patient_id = patient_id).delete()
+            db.session.commit()
+
+            return render_template("delete_patient.html", message="Patient Deleted")
+        else:
+            return render_template("delete_patient.html")
+
+@app.route('/show_record',methods=['GET','POST'])
+def show_record():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        data = patient_data.query.all()
+        return render_template('show_record.html',data=data)
+
+
+@app.route('/add_meds',methods=['GET','POST'])
+def add_meds():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method =='POST':
+            patient_id=request.form['patient_id']
+            medicine_name= request.form['medicine_name']
+            quantity = request.form['quantity']
+            price = request.form['price']
+
+            new_medicine = pharmacy_data(patient_id=patient_id,medicine_name=medicine_name,quantity=quantity,price=price)
+            db.session.add(new_medicine)
+            db.session.commit()
+            message = 'medicine added'
+            return render_template('add_meds.html',message=message)
+        else:
+            return render_template('add_meds.html')
+
+
+
 
 
 
