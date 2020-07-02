@@ -238,6 +238,21 @@ def add_diagnosis():
         else:
             return render_template('add_diagnosis.html')
 
+@app.route('/show_diagnosis_record',methods=['GET','POST'])
+def show_diagnosis_record():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            data= diagnosis_data.query.filter_by(patient_id=search)
+            if data is None:
+                return render_template('show_diagnosis_record.html',message=" No test done")
+            else:
+                return render_template('show_diagnosis_record.html',data = data )
+        else:
+            return render_template('show_diagnosis_record.html')
+
 
 
 
