@@ -204,7 +204,20 @@ def add_meds():
             return render_template('add_meds.html',message=message)
         else:
             return render_template('add_meds.html')
-
+@app.route('/show_meds_record',methods=['GET','POST'])
+def show_meds_record():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            data= pharmacy_data.query.filter_by(patient_id=search)
+            if data is None:
+                return render_template('show_meds_record.html',message="Patient does not exist")
+            else:
+                return render_template('show_meds_record.html',data = data )
+        else:
+            return render_template('show_meds_record.html')
 
 
 

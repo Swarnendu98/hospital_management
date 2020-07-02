@@ -1,0 +1,65 @@
+{% extends 'base1.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+<title> Medicine Records</title>
+{% endblock %}
+
+{% block body %}
+<h1>Medicine Records</h1>
+
+<div>
+    <form class="pure-form" method="post" action="/show_meds_record">
+    <input type="number" name="search" class="pure-input-rounded" placeholder="Patient ID" required=""/>
+    <button type="submit" class="pure-button">Search Medicine</button>
+</form>
+</div>
+
+
+{%if message %}
+    <div>
+        <p>{{message}}</p>
+    </div>
+{% endif %}
+
+
+
+{%if data %}
+
+<div style="background-color: rgba(174, 213, 129, 0.5);margin-right: 150px;margin-left: 150px;border-radius: 3px;padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 10px;padding-bottom: 10px">
+
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Medicine Name</th>
+            <th>Quantity </th>
+            <th>Price</th>
+            <th>Ammount</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for something in data %}
+        <tr>
+            <td>{{something.pharmacy_bill_no}}</td>
+            <td>{{something.medicine_name}}</td>
+            <td>{{something.quantity}}</td>
+            <td>{{something.price}}</td>
+            <td>{{something.quantity * something.price}}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+{% endblock %}
