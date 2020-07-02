@@ -1,0 +1,302 @@
+{% extends 'base1.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+<title>Update Patient</title>
+{% endblock %}
+
+{% block body %}
+<h1>Update Patient</h1>
+<div>
+    <form class="pure-form" method="post" action="/update_patient">
+    <input type="number" name="search" class="pure-input-rounded" placeholder="AdharNo." required=""/>
+    <button type="submit" class="pure-button">Search</button>
+</form>
+</div>
+
+{%if message %}
+    <div>
+        <p>{{message}}</p>
+    </div>
+{% endif %}
+
+
+
+{%if data %}
+
+<div style="background-color: rgba(174, 213, 129, 0.5);margin-right: 100px;margin-left: 100px;border-radius: 3px;padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 10px">
+
+    <form class="pure-form pure-form-stacked" action="/update_patient" method="post">
+    <fieldset>
+        <legend style="border-bottom-color: #424242">Update Patient Details</legend>
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645" >Adhar No.</label>
+                <input type="text" name="patient_adhar" class="pure-u-23-24" value="{{data.patient_adhar}}" />
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645" >Patient ID</label>
+                <input type="number" name="patient_id" class="pure-u-23-24" value="{{data.patient_id}}" readonly/>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645" >Patient Name</label>
+                <input type="text" name="patient_name" class="pure-u-23-24" required="" value="{{data.patient_name}}"/>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645">Age</label>
+                <input type="number" name="patient_age" class="pure-u-23-24" required="" value="{{data.patient_age}}"/>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645">Address</label>
+                <input type="text" name="patient_address" class="pure-u-23-24" required="" value="{{data.patient_address}}"/>
+            </div>
+             <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645" >Bed Type</label>
+                <select name="patient_bed_type" class="pure-input-1-2" required="">
+                    <option selected="selected">-Select-</option>
+<option>General Ward</option>
+<option>Semi Sharing</option>
+<option>Single Room</option>
+
+
+                </select>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label style="color: #273645" >State</label>
+                <select name="patient_state" class="pure-input-1-2" required="">
+                    <option selected="selected">-Select-</option>
+<option value=”Andhra&nbsp;Pradesh”>Andhra Pradesh</option>
+<option value=”Andaman&nbsp;and&nbsp;Nicobar&nbsp;Islands”>Andaman and Nicobar Islands</option>
+<option value=”Arunachal&nbsp;Pradesh”>Arunachal Pradesh</option>
+<option value=”Assam”>Assam</option>
+<option value=”Bihar”>Bihar</option>
+<option value=”Chandigarh”>Chandigarh</option>
+<option value=”Chhattisgarh”>Chhattisgarh</option>
+<option value=”Dadar&nbsp;and&nbsp;Nagar&nbsp;Haveli”>Dadar and Nagar Haveli</option>
+<option value=”Daman&nbsp;and&nbsp;Diu”>Daman and Diu</option>
+<option value=”Delhi”>Delhi</option>
+<option value=”Lakshadweep”>Lakshadweep</option>
+<option value=”Puducherry”>Puducherry</option>
+<option value=”Goa”>Goa</option>
+<option value=”Gujarat”>Gujarat</option>
+<option value=”Haryana”>Haryana</option>
+<option value=”Himachal&nbsp;Pradesh”>Himachal Pradesh</option>
+<option value=”Jammu&nbsp;and&nbsp;Kashmir”>Jammu and Kashmir</option>
+<option value=”Jharkhand”>Jharkhand</option>
+<option value=”Karnataka”>Karnataka</option>
+<option value=”Kerala”>Kerala</option>
+<option value=”Madhya&nbsp;Pradesh”>Madhya Pradesh</option>
+<option value=”Maharashtra”>Maharashtra</option>
+<option value=”Manipur”>Manipur</option>
+<option value=”Meghalaya”>Meghalaya</option>
+<option value=”Manipur”>Manipur</option>
+<option value=”Meghalaya”>Meghalaya</option>
+<option value=”Mizoram”>Mizoram</option>
+<option value=”Nagaland”>Nagaland</option>
+<option value=”Odisha”>Odisha</option>
+<option value=”Punjab”>Punjab</option>
+<option value=”Rajasthan”>Rajasthan</option>
+<option value=”Sikkim”>Sikkim</option>
+<option value=”Tamil&nbsp;Nadu”>Tamil Nadu</option>
+<option value=”Telangana”>Telangana</option>
+<option value=”Tripura”>Tripura</option>
+<option value=”Uttar&nbsp;Pradesh”>Uttar Pradesh</option>
+<option value=”Uttarakhand”>Uttarakhand</option>
+<option value=”West&nbsp;Bengal”>West Bengal</option>
+
+                </select>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-3">
+                <label  style="color: #273645">City</label>
+                <select name="patient_city" class="pure-input-1-2" required="">
+                    <option selected="selected">-Select-</option>
+                    <option>Ahmedabad</option>
+<option>Bengaluru/Bangalore</option>
+<option>Chandigarh</option>
+<option>Chennai</option>
+<option>Delhi</option>
+<option>Gurgaon</option>
+<option>Hyderabad/Secunderabad</option>
+<option>Kolkata</option>
+<option>Mumbai</option>
+<option>Noida</option>
+<option>Pune</option>
+<option>Anantapur</option>
+<option>Guntakal</option>
+<option>Guntur</option>
+<option>Hyderabad/Secunderabad</option>
+<option>kakinada</option>
+<option>kurnool</option>
+<option>Nellore</option>
+<option>Nizamabad</option>
+<option>Rajahmundry</option>
+<option>Tirupati</option>
+<option>Vijayawada</option>
+<option>Visakhapatnam</option>
+<option>Warangal</option>
+<option>Itanagar</option>
+<option>Guwahati</option>
+<option>Silchar</option>
+<option>Bhagalpur</option>
+<option>Patna</option>
+<option>Bhillai</option>
+<option>Bilaspur</option>
+<option>Raipur</option>
+<option>Panjim/Panaji</option>
+<option>Vasco Da Gama</option>
+<option>Ahmedabad</option>
+<option>Anand</option>
+<option>Ankleshwar</option>
+<option>Bharuch</option>
+<option>Bhavnagar</option>
+<option>Bhuj</option>
+<option>Gandhinagar</option>
+<option>Gir</option>
+<option>Jamnagar</option>
+<option>Kandla</option>
+<option>Porbandar</option>
+<option>Rajkot</option>
+<option>Surat</option>
+<option>Vadodara/Baroda</option>
+<option>Valsad</option>
+<option>Vapi</option>
+<option>Ambala</option>
+<option>Chandigarh</option>
+<option>Faridabad</option>
+<option>Gurgaon</option>
+<option>Hisar</option>
+<option>Karnal</option>
+<option>Kurukshetra</option>
+<option>Panipat</option>
+<option>Rohtak</option>
+<option>Dalhousie</option>
+<option>Dharmasala</option>
+<option>Kulu/Manali</option>
+<option>Shimla</option>
+<option>Jammu</option>
+<option>Srinagar</option>
+<option>Bokaro</option>
+<option>Dhanbad</option>
+<option>Jamshedpur</option>
+<option>Ranchi</option>
+<option>Bengaluru/Bangalore</option>
+<option>Belgaum</option>
+<option>Bellary</option>
+<option>Bidar</option>
+<option>Dharwad</option>
+<option>Gulbarga</option>
+<option>Hubli</option>
+<option>Kolar</option>
+<option>Mangalore</option>
+<option>Mysoru/Mysore</option>
+<option>Calicut</option>
+<option>Cochin</option>
+<option>Ernakulam</option>
+<option>Kannur</option>
+<option>Kochi</option>
+<option>Kollam</option>
+<option>Kottayam</option>
+<option>Kozhikode</option>
+<option>Palakkad</option>
+<option>Palghat</option>
+<option>Thrissur</option>
+<option>Trivandrum</option>
+<option>Bhopal</option>
+<option>Gwalior</option>
+<option>Indore</option>
+<option>Jabalpur</option>
+<option>Ujjain</option>
+<option>Ahmednagar</option>
+<option>Aurangabad</option>
+<option>Jalgaon</option>
+<option>Kolhapur</option>
+<option>Mumbai</option>
+<option>Mumbai Suburbs</option>
+<option>Nagpur</option>
+<option>Nasik</option>
+<option>Navi Mumbai</option>
+<option>Pune</option>
+<option>Solapur</option>
+<option>Imphal</option>
+<option>Shillong</option>
+<option>Aizawal</option>
+<option>Dimapur</option>
+<option>Bhubaneshwar</option>
+<option>Cuttak</option>
+<option>Paradeep</option>
+<option>Puri</option>
+<option>Rourkela</option>
+<option>Amritsar</option>
+<option>Bathinda</option>
+<option>Chandigarh</option>
+<option>Jalandhar</option>
+<option>Ludhiana</option>
+<option>Mohali</option>
+<option>Pathankot</option>
+<option>Patiala</option>
+<option>Ajmer</option>
+<option>Jaipur</option>
+<option>Jaisalmer</option>
+<option>Jodhpur</option>
+<option>Kota</option>
+<option>Udaipur</option>
+<option>Gangtok</option>
+<option>Chennai</option>
+<option>Coimbatore</option>
+<option>Cuddalore</option>
+<option>Erode</option>
+<option>Hosur</option>
+<option>Madurai</option>
+<option>Nagerkoil</option>
+<option>Ooty</option>
+<option>Salem</option>
+<option>Thanjavur</option>
+<option>Tirunalveli</option>
+<option>Trichy</option>
+<option>Tuticorin</option>
+<option>Vellore</option>
+<option>Agartala</option>
+<option>Chandigarh</option>
+<option>Dadra & Nagar Haveli-Silvassa</option>
+<option>Daman & Diu</option>
+<option>Delhi</option>
+<option>Agra</option>
+<option>Aligarh</option>
+<option>Allahabad</option>
+<option>Bareilly</option>
+<option>Faizabad</option>
+<option>Ghaziabad</option>
+<option>Gorakhpur</option>
+<option>Kanpur</option>
+<option>Lucknow</option>
+<option>Mathura</option>
+<option>Meerut</option>
+<option>Moradabad</option>
+<option>Noida</option>
+<option>Varanasi/Banaras</option>
+<option>Dehradun</option>
+<option>Roorkee</option>
+<option>Asansol</option>
+<option>Durgapur</option>
+<option>Haldia</option>
+<option>Kharagpur</option>
+<option>Kolkatta</option>
+<option>Siliguri</option>
+<option>Other</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="pure-button pure-button-primary" value="Submit">Update</button>
+    </fieldset>
+</form>
+
+</div>
+
+{% endif %}
+
+
+
+
+
+{% endblock %}
