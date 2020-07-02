@@ -1,4 +1,4 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
@@ -11,6 +11,7 @@ db = SQLAlchemy(app)
 class executive_data(db.Model):
     ex_id = db.Column(db.Integer,primary_key=True,autoincrement=True)
     ex_pass = db.Column(db.VARCHAR(25),nullable=False)
+    ex_name = db.Column(db.String,nullable=False)
 class patient_data(db.Model):
     patient_id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     patient_adhar= db.Column(db.BigInteger,unique=True)
@@ -36,6 +37,11 @@ class diagnosis_data(db.Model):
     def __repr__(self):
         return 'details'+str(self.ex_id)
 
-@app.route("/")
+@app.route("/",methods=['GET','POST'])
 def login():
-    return 'H'
+    if request.method =='POST' and 'exe_id'and 'exe_pass' in request.form:
+
+        return "Hello"
+    else :
+        return render_template("login.html")
+
