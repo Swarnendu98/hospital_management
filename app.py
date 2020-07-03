@@ -254,7 +254,26 @@ def show_diagnosis_record():
             return render_template('show_diagnosis_record.html')
 
 
-
+@app.route('/meds_bill',methods=['GET','POST'])
+def meds_bill():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            data= pharmacy_data.query.filter_by(patient_id=search)
+            if data is None:
+                return render_template('meds_bill.html',message="Patient does not exist")
+            else:
+                total=0
+                for i in data:
+                    total= total + (i.quantity*i.price)
+                data1=[]
+                data1.append(data)
+                data1.append(total)
+                return render_template('meds_bill.html',data = data1 )
+        else:
+            return render_template('meds_bill.html')
 
 
 
