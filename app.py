@@ -275,6 +275,27 @@ def meds_bill():
         else:
             return render_template('meds_bill.html')
 
+@app.route('/diagnosis_bill',methods=['GET','POST'])
+def diagnosis_bill():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            data= diagnosis_data.query.filter_by(patient_id=search)
+            if data is None:
+                return render_template('diagnosis_bill.html',message=" No test done")
+            else:
+                total =0
+                for i in data:
+                    total= total + i.cost
+                data1=[]
+                data1.append(data)
+                data1.append(total)
+                return render_template('diagnosis_bill.html',data = data1 )
+
+        else:
+            return render_template('diagnosis_bill.html')
 
 
 

@@ -10,7 +10,7 @@
 <h1>Diagnosis Records</h1>
 
 <div>
-    <form class="pure-form" method="post" action="/show_diagnosis_record">
+    <form class="pure-form" method="post" action="/diagnosis_bill">
     <input type="number" name="search" class="pure-input-rounded" placeholder="Patient ID" required=""/>
     <button type="submit" class="pure-button">Search Diagnosis</button>
 </form>
@@ -40,7 +40,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for something in data %}
+    {% for something in data[0] %}
         <tr>
             <td>{{something.diagnosis_bill_no}}</td>
             <td>{{something.test_name}}</td>
@@ -49,6 +49,7 @@
     {% endfor %}
     </tbody>
 </table>
+    <h4> Total : {{data[1]}} </h4>
 </div>
 {% endif %}
 
