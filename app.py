@@ -29,7 +29,7 @@ class patient_data(db.Model):
     patient_id=db.Column(db.Integer,primary_key=True,autoincrement=True)
     patient_adhar= db.Column(db.BigInteger,unique=True)
     patient_age= db.Column(db.Integer,nullable=False)
-    patient_admission_date=db.Column(db.DateTime,nullable=False,default=date.today())
+    patient_admission_date=db.Column(db.Date,nullable=False,default=date.today())
     patient_bed_type = db.Column(db.String,nullable=False)
     patient_address=db.Column(db.String,nullable=False)
     patient_state = db.Column(db.String,nullable=False)
@@ -298,6 +298,53 @@ def diagnosis_bill():
             return render_template('diagnosis_bill.html')
 
 
+
+@app.route('/total_bill',methods=['GET','POST'])
+def total_bill():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+    else:
+        if request.method == 'POST' and 'search' in request.form:
+            search = request.form.get('search')
+            Diagnosis_data = diagnosis_data.query.filter_by(patient_id=search)
+            Pharmacy_data = pharmacy_data.query.filter_by(patient_id=search)
+            Patient_data = patient_data.query.filter_by(patient_id=search)
+
+            diagnosis_total= 0
+            for i in Diagnosis_data:
+                diagnosis_total = diagnosis_total + i.cost
+            pharmacy_total = 0
+            for i in Pharmacy_data :
+                pharmacy_total= pharmacy_total + (i.quantity*i.price)
+            patient_total1 = 0
+            bed_type = Patient_data[0].patient_bed_type
+            no_of_days = date.today()-Patient_data[0].patient_admission_date
+            days = no_of_days.days
+            if days== 0:
+                days = days + 1
+            if bed_type == 'General Ward':
+                patient_total = days*2000
+                patient_total1= patient_total1+ patient_total
+            elif bed_type == 'Semi Sharing':
+                patient_total = days*4000
+                patient_total1 = patient_total1+ patient_total
+            else:
+                patient_total = days*2000
+                patient_total1 = patient_total1+ patient_total
+            data1 =[]
+            data1.append(Diagnosis_data)
+            data1.append(Pharmacy_data)
+            data1.append(Patient_data)
+            data1.append(diagnosis_total)
+            data1.append(pharmacy_total)
+            data1.append(patient_total1)
+            today = date.today()
+            data1.append(today)
+            grand_total = pharmacy_total+diagnosis_total+patient_total
+            data1.append(grand_total)
+            return render_template('total_bill.html', data=data1)
+        else:
+            return render_template('total_bill.html')
 
 
 

@@ -1,0 +1,122 @@
+{% extends 'base1.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+<title> Total Bill</title>
+{% endblock %}
+
+{% block body %}
+<h1>Total Bill</h1>
+
+<div>
+    <form class="pure-form" method="post" action="/total_bill">
+    <input type="number" name="search" class="pure-input-rounded" placeholder="Patient ID" required=""/>
+    <button type="submit" class="pure-button">Generate Bill</button>
+</form>
+</div>
+
+
+{%if message %}
+    <div>
+        <p>{{message}}</p>
+    </div>
+{% endif %}
+
+
+
+{%if data %}
+
+<div style="background-color: rgba(174, 213, 129, 0.5);margin-right: 150px;margin-left: 150px;border-radius: 3px;padding-left: 20px;padding-right: 20px;padding-top: 10px;margin-top: 10px;padding-bottom: 10px">
+    <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Patient ID</th>
+            <th>Patient Name</th>
+            <th>Age </th>
+            <th>Address</th>
+            <th>Date of Joining</th>
+            <th>Date of Discharge</th>
+            <th>type of Room</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for something in data[2] %}
+        <tr>
+            <td>{{something.patient_id}}</td>
+            <td>{{something.patient_name}}</td>
+            <td>{{something.patient_age}}</td>
+            <td>{{something.patient_address}}</td>
+            <td>{{something.patient_admission_date}}</td>
+            <td>{{data[6]}}</td>
+            <td>{{something.patient_bed_type}}</td>
+
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+    <h4> Total : {{data[5]}} </h4>
+
+    <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Medicine Name</th>
+            <th>Quantity </th>
+            <th>Price</th>
+            <th>Ammount</th>
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for something in data[1] %}
+        <tr>
+            <td>{{something.pharmacy_bill_no}}</td>
+            <td>{{something.medicine_name}}</td>
+            <td>{{something.quantity}}</td>
+            <td>{{something.price}}</td>
+            <td>{{something.quantity * something.price}}</td>
+
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+    <h4> Total : {{data[4]}} </h4>
+
+    <table class="pure-table">
+    <thead>
+        <tr>
+            <th>Bill ID</th>
+            <th>Test Name</th>
+            <th>Cost</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+    {% for something in data[0] %}
+        <tr>
+            <td>{{something.diagnosis_bill_no}}</td>
+            <td>{{something.test_name}}</td>
+            <td>{{something.cost}}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    <h4> Total : {{data[3]}} </h4>
+
+
+    <h4 style="color: orangered"> Grand Total : {{data[7]}} </h4>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+{% endblock %}
